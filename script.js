@@ -22,8 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const price = parseFloat(priceInput.value);
         const quantity = parseInt(quantityInput.value) || 1;
         
-        if (isNaN(price) {
-            alert('Please enter a valid price');
+        if (isNaN(price) || price <= 0) {
+            alert('Please enter a valid price (greater than 0)');
+            return;
+        }
+        
+        if (isNaN(quantity) {
+            alert('Please enter a valid quantity');
             return;
         }
         
@@ -38,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderItems();
         updateResults();
         
-        // Reset input fields
+        // Clear and focus the price input for next entry
         priceInput.value = '';
         quantityInput.value = '1';
         priceInput.focus();
@@ -51,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
             saveItems();
             renderItems();
             updateResults();
+            priceInput.focus();
         }
     });
     
@@ -100,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 saveItems();
                 renderItems();
                 updateResults();
+                priceInput.focus();
             });
         });
     }
@@ -119,4 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function saveItems() {
         localStorage.setItem('averagePriceItems', JSON.stringify(items));
     }
+    
+    // Focus the price input when page loads
+    priceInput.focus();
 });
